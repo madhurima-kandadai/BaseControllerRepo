@@ -11,11 +11,12 @@ namespace BaseControllerBaseResult.Controllers
     //[Authorize]
     public class ValuesController : BaseController<Customer>
     {
-        // GET api/values
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        //GET api/values
+        public BaseResult Get()
+        {
+            var list = new string[] { "value1", "value2" };
+            return Result(list);
+        }
 
         [HttpGet]
         public BaseResult GetAll()
@@ -27,13 +28,13 @@ namespace BaseControllerBaseResult.Controllers
                 list.Add(new Customer() { Id = 2, Name = "C2" });
                 list.Add(new Customer() { Id = 3, Name = "C3" });
                 //var list = new string[] { "value1", "Value2" };
-                var result = ReturnResult(list);
+                var result = Result(list);
                 throw new OverflowException();
                 return result;
             }
             catch (Exception ex)
             {
-                return ReturnResult(ex);
+                return Error(ex);
             }
         }
 
@@ -47,12 +48,12 @@ namespace BaseControllerBaseResult.Controllers
                 list.Add(new Customer() { Id = 2, Name = "C2" });
                 list.Add(new Customer() { Id = 3, Name = "C3" });
                 //var list = new string[] { "value1", "Value2" };
-                var result = ReturnResult(list);
+                var result = Result(list);
                 return result;
             }
             catch (Exception ex)
             {
-                return ReturnResult(ex);
+                return Error(ex);
             }
         }
 
@@ -60,7 +61,7 @@ namespace BaseControllerBaseResult.Controllers
         [HttpGet]
         public BaseResult GetCustomer(int id)
         {
-            return ReturnResult(new Customer() { Id = 1, Name = "Dsd" });
+            return Result(new Customer() { Id = 1, Name = "Dsd" });
             //return "value";
         }
 

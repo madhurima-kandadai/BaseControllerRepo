@@ -10,7 +10,7 @@ namespace BaseControllerBaseResult.Controllers
 {
     public class BaseController<T> : ApiController where T : class
     {
-        public BaseResult ReturnResult(List<T> model)
+        public BaseResult Result(List<T> model)
         {
             var result = new BaseResult();
             result.Data = model;
@@ -19,7 +19,7 @@ namespace BaseControllerBaseResult.Controllers
             return result;
         }
 
-        public BaseResult ReturnResult(T model)
+        public BaseResult Result(T model)
         {
             var result = new BaseResult();
             result.Data = model;
@@ -28,12 +28,21 @@ namespace BaseControllerBaseResult.Controllers
             return result;
         }
 
-        public BaseResult ReturnResult(Exception exception)
+        public BaseResult Result(object model)
         {
             var result = new BaseResult();
-            result.Data = exception.Message;
-            result.Status = exception.HResult.ToString();
-            result.Exception = exception.InnerException.ToString();
+            result.Data = model;
+            result.Status = "OK";
+            result.Exception = "None";
+            return result;
+        }
+
+        public BaseResult Error(Exception exception)
+        {
+            var result = new BaseResult();
+            result.Message = exception.Message;
+            result.Status = 
+            result.Exception = exception.GetBaseException().Message;
             return result;
         }
     }
